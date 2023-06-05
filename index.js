@@ -1,7 +1,16 @@
 let discos = [];
 
-// Función para buscar por código //
+// Función para buscar por nombre de disco y autor//
+function buscarPorNombreAutor(nombreDisco, autor) {
+  for(let i = 0; i < discos.length; i++) {
+    if(discos[i].nombre === nombreDisco && discos[i].autor === autor) {
+      return true;
+    }
+  }
+  return false;
+}
 
+//Función para buscar por código//
 function buscarPorCodigo(codigo) {
   for(let i = 0; i < discos.length; i++) {
     if(discos[i].codigo === codigo) {
@@ -11,8 +20,7 @@ function buscarPorCodigo(codigo) {
   return false;
 }
 
-//Para cargar todo lo del Disco//
-
+// Para cargar todo lo del Disco//
 function cargar() {
   let disco = {};
   let codigoExistente = true;
@@ -31,6 +39,12 @@ function cargar() {
   
   disco.nombre = prompt("Ingrese el nombre del disco:");
   disco.autor = prompt("Ingrese el autor o banda del disco:");
+  
+  // Se verifica si el disco ya ha sido ingresado//
+  if(buscarPorNombreAutor(disco.nombre, disco.autor)) {
+    alert("El disco o el autor ingresado ya existe.");
+    return;
+  }
   
   disco.pistas = [];
   let cargarPistas = true;
@@ -77,8 +91,7 @@ function cargar() {
   console.log(`La duración máxima de este disco es de ${maxDuracion} segundos`);
 }
 
-//Se muestran los datos cargados del Disco. Inserto html y agrego color para los requisitos requeridos//
-
+// Se muestran los datos cargados del Disco. Inserto html y agrego color para los requisitos requeridos//
 function mostrar() {
   let html = "<h2>Listado de discos</h2>";
   let maxDuracion = maxDuracionDisco();
@@ -105,8 +118,7 @@ function mostrar() {
   document.getElementById("listado-discos").innerHTML = html;
 }
 
-//Calculo Máxima duración//
-
+// Calculo Máxima duración //
 function maxDuracionDisco() {
   let maxDuracion = 0;
 
