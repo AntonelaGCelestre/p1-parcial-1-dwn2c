@@ -40,8 +40,14 @@ function cargar() {
   disco.nombre = prompt("Ingrese el nombre del disco:");
   disco.autor = prompt("Ingrese el autor o banda del disco:");
   
+  let validarvacio = true;
+  if(disco.autor === "" && disco.nombre ===""){
+    alert("El campo se encuentra vacio. Debe agregar Nombre del Disco y Autor/Banda")
+    validarvacio = false;
+  }
+
   // Se verifica si el disco ya ha sido ingresado//
-  if(buscarPorNombreAutor(disco.nombre, disco.autor)) {
+  if(buscarPorNombreAutor(disco.nombre, disco.autor) ) {
     alert("El disco o el autor ingresado ya existe.");
     return;
   }
@@ -49,7 +55,7 @@ function cargar() {
   disco.pistas = [];
   let cargarPistas = true;
   
-  while(cargarPistas) {
+  while(cargarPistas && validarvacio) {
     let pista = {};
     
     pista.nombre = prompt("Ingrese el nombre de la pista:");
